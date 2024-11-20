@@ -1,0 +1,6 @@
+﻿**/out
+**/build**
+
+*.user
+**/CMakeSettings.json
+**/cmake-build-cl-debug

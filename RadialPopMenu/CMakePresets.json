@@ -1,0 +1,43 @@
+{
+    "version": 8,
+    "configurePresets": [
+      {
+        "name": "win",
+        "displayName": "win-config",
+        "generator": "Ninja Multi-Config",
+        "binaryDir": "${sourceDir}/build-win",
+        "installDir": "${sourceDir}/install/${presetName}",
+        "cacheVariables": {
+          "CMAKE_MAKE_PROGRAM": "C:/Qt6/Tools/Ninja/ninja.exe",
+          "CMAKE_MODULE_PATH": "",
+          "CMAKE_C_STANDARD": "99",
+          "CMAKE_C_STANDARD_REQUIRED": true,
+          "CMAKE_C_EXTENSIONS" : true,
+          "CMAKE_PREFIX_PATH" : "C:/Qt6/6.8.0/llvm-mingw_64"
+        },
+        "environment": {
+          "CMAKE_PATH": "C:/Qt6/Tools/CMake_64/bin",
+          "PATH": "${env:CMAKE_PATH};C:/Qt6/Tools/llvm-mingw1706_64/bin;$penv{PATH}"
+        }
+      }
+    ],
+    "buildPresets": [
+      {
+        "name": "debug",
+        "configurePreset": "win",
+        "configuration": "Debug"
+      },
+      {
+        "name": "release",
+        "configurePreset": "win",
+        "configuration": "Release"
+      },
+      {
+        "name": "relwithdebinfo",
+        "configurePreset": "win",
+        "configuration": "RelWithDebInfo"
+      }
+    ]
+  }
+
+  

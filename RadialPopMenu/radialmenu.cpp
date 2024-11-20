@@ -10,6 +10,7 @@
 #include <QDebug>
 #include <QMouseEvent>
 #include <QApplication>
+#include <QPainterPath>
 
 static constexpr qreal _2PI = 3.1415926 * 2;
 
@@ -321,7 +322,7 @@ QSize RadialMenu::doLayout(bool calcOnly)
     {
         // 直接返回容纳所有控件的size
         int left = 0, top = 0, right = 0, bottom = 0;
-        getContentsMargins(&left, &top, &right, &bottom);
+        //getContentsMargins(&left, &top, &right, &bottom);
         return bounding.size() + QSize(left + right, top + bottom);
     }
     else
