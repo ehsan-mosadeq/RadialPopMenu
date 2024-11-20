@@ -1,12 +1,21 @@
-﻿#ifndef RADIALMENU_H
-#define RADIALMENU_H
+﻿#pragma once
+
+#include "RadialMenuRoot.h"
+#include "CircleToolButton.h"
 
 #include <QWidget>
-#include<QToolButton>
+#include <QToolButton>
 #include <QTimeLine>
 
 class QVariantAnimation;
 class CircleToolButton;
+
+inline QPoint pointInterpolate(const QPoint & from, const QPoint & to, qreal progress)
+{
+    return from + (to - from) * progress;
+}
+
+static constexpr qreal _2PI = 3.1415926 * 2;
 
 class RadialMenu : public QWidget
 {
@@ -35,6 +44,13 @@ public:
     // 设置对齐，当窗口尺寸与实际显示不一致时，action区域的对齐方向
     void setAlignment(Qt::Alignment alignment);
 
+    struct ActioItem
+    {
+        CircleToolButton * button;
+        QPoint startPos;
+        QPoint endPos;
+    };
+
 protected:
     bool event(QEvent *e);
     void paintEvent(QPaintEvent *event);
@@ -52,7 +68,6 @@ private:
 
 public:
     CircleToolButton * rootButton = nullptr;
-    struct ActioItem;
     QVector<ActioItem*> allActionItem;
     int radialDistance = 100;
 
@@ -65,26 +80,3 @@ public:
     qreal _spanAngle = 2 * 3.1415926;
     Qt::Alignment _align = Qt::AlignLeft | Qt::AlignTop;
 };
-
-
-class CircleToolButton : public QToolButton
-{
-public:
-    using QToolButton::QToolButton;
-    // 设置绘制的不透明度
-    void setOpacity(qreal opacity);
-protected:
-    // 点击区域，因为窗口是矩形，限定圆形范围
-    bool hitButton(const QPoint &pos) const;
-    void paintEvent(QPaintEvent *);
-    bool event(QEvent *e);
-    // 坐标是否在圆形范围内
-    bool posInCircle(const QPoint &pos) const;
-
-private:
-    qreal paintOpacaty = 1.0;
-};
-
-
-
-#endif // RADIALMENU_H
